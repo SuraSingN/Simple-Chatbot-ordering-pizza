@@ -1,0 +1,83 @@
+# pizza price
+pizza_price = c(120, 180, 240)
+
+chatbot <- function() {
+  print("Hi! Welcome to pizza shop")
+  print("How can I help you today?")
+  customer_need <- readLines("stdin", n = 1L)
+  print("Okay! What kind of pizza would you like")
+  order_pizza <- readLines("stdin", n = 1L)
+  print("Would you like a small, medium, or large size?")
+  while (TRUE) {
+    pizza_size <- readLines("stdin", n = 1L)
+    if (pizza_size == "small") {
+      print( paste(pizza_price[[1]], "THB please"))
+      small <- pizza_price[[1]]
+      break
+    } else if (pizza_size == "medium") {
+      print( paste(pizza_price[[2]], "THB please"))
+      medium <- pizza_price[[2]]
+      break
+    } else if (pizza_size == "large") {
+      print( paste(pizza_price[[3]], "THB please"))
+      large <- pizza_price[[3]]
+      break
+    } else {
+      print("Sorry, Can you say again please? [small, medium, or large]")
+    }
+  }
+  print("Is there anything else I can do for you now")
+  while (TRUE) {
+    more_pizza <- readLines("stdin", n = 1L)
+    if (substr(more_pizza, 1, 1) == "Y") {
+       print("Please go ahead. What pizza would you like to add?")
+       order_pizza_again <- readLines("stdin", n = 1L)
+       print("Sure! What size would you like? [small, medium, or large]")
+        while (TRUE) {
+            pizza_size_2 <- readLines("stdin", n = 1L)
+            if (pizza_size_2 == "small") {
+            print( paste("Sure it is another", pizza_price[[1]], "THB please"))
+            small_2 <- pizza_price[[1]]
+            break
+            } else if (pizza_size_2 == "medium") {
+            print( paste("Another", pizza_price[[2]], "THB please"))
+            medium_2 <- pizza_price[[2]]
+            break
+            } else if (pizza_size_2 == "large") {
+            print( paste("Absolutely! It would be another", pizza_price[[3]], "THB please"))
+            large_2 <- pizza_price[[3]]
+            break
+            } else {
+            print("Sorry. Is it small, medium, or large?")
+            }
+        }
+    } else {
+        break
+    }
+      }
+  print("Can I have your name please")
+  customer_name <- readLines("stdin", n = 1L)
+  print(paste("Thank you", customer_name, "your order is", order_pizza, "and", order_pizza_again, 
+            "and that is", if (pizza_size == "small" & pizza_size_2 == "small") {
+              paste(sum(small,small_2), "THB Please")
+            } else if (pizza_size == "small" & pizza_size_2 == "medium") {
+              paste(sum(small,medium_2), "THB Please")
+            } else if (pizza_size == "small" & pizza_size_2 == "large") {
+              paste(sum(small,large_2), "THB Please")
+            } else if (pizza_size == "medium" & pizza_size_2 == "small") {
+              paste(sum(medium,small_2), "THB Please")
+            } else if (pizza_size == "medium" & pizza_size_2 == "medium") {
+              paste(sum(medium,medium_2), "THB Please")
+            } else if (pizza_size == "medium" & pizza_size_2 == "large") {
+              paste(sum(medium,large_2), "THB Please")
+            } else if (pizza_size == "large" & pizza_size_2 == "small") {
+              paste(sum(large,small_2), "THB Please")
+            } else if (pizza_size == "large" & pizza_size_2 == "medium") {
+              paste(sum(large,medium_2), "THB Please")
+            } else if (pizza_size == "large" & pizza_size_2 == "large") {
+              paste(sum(large,large_2), "THB Please")
+            }
+          ))
+}
+
+chatbot()
